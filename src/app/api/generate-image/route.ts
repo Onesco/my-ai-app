@@ -9,7 +9,12 @@ export async function POST(req: Request) {
     prompt,
   });
 
-  return new Response(image.uint8Array, {
+  // Convert Uint8Array to ArrayBuffer for Response
+  const buffer = new ArrayBuffer(image.uint8Array.length);
+  const view = new Uint8Array(buffer);
+  view.set(image.uint8Array);
+
+  return new Response(buffer, {
     headers: {
       'Content-Type': 'image/png',
     },
