@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { experimental_useObject as useObject } from '@ai-sdk/react';
 import { z } from 'zod';
 import Link from 'next/link';
@@ -12,7 +12,7 @@ const flashcardSchema = z.object({
   hint: z.string(),
 });
 
-export default function FlashcardsPage() {
+function FlashcardsContent() {
   const searchParams = useSearchParams();
   const topicFromUrl = searchParams.get('topic');
 
@@ -230,5 +230,13 @@ export default function FlashcardsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function FlashcardsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <FlashcardsContent />
+    </Suspense>
   );
 }
