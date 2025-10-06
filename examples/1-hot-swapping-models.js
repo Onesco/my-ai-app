@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { openai } from '@ai-sdk/openai';
 import { generateObject } from 'ai';
 import { z } from 'zod';
+ const { anthropic } = await import('@ai-sdk/anthropic');
 
 /**
  * HOT-SWAPPING MODELS
@@ -16,7 +17,7 @@ async function generateSlidesWithModelSelection(topic, modelProvider = 'openai')
   let selectedModel;
 
   if (modelProvider === 'anthropic' || modelProvider === 'anthropic-haiku') {
-    const { anthropic } = await import('@ai-sdk/anthropic');
+   
     const modelMap = {
       'anthropic': anthropic('claude-3-5-sonnet-20241022'),
       'anthropic-haiku': anthropic('claude-3-5-haiku-20241022'),
