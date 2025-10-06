@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { experimental_useObject as useObject } from '@ai-sdk/react';
 import { z } from 'zod';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Navigation from '@/components/Navigation';
 
 const slideSchema = z.object({
   title: z.string(),
@@ -53,55 +53,28 @@ export default function SlideGeneratorPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-      <nav className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 py-3">
-        <div className="max-w-7xl mx-auto flex gap-4">
-          <Link
-            href="/"
-            className="px-4 py-2 rounded-lg bg-gray-500 text-white hover:bg-gray-600 transition-colors"
-          >
-            Home
-          </Link>
-          <Link
-            href="/generate-image"
-            className="px-4 py-2 rounded-lg bg-purple-500 text-white hover:bg-purple-600 transition-colors"
-          >
-            Image Generator
-          </Link>
-          <Link
-            href="/slide-generator"
-            className="px-4 py-2 rounded-lg bg-indigo-500 text-white hover:bg-indigo-600 transition-colors"
-          >
-            Slide Generator
-          </Link>
-          <Link
-            href="/flashcards"
-            className="px-4 py-2 rounded-lg bg-pink-500 text-white hover:bg-pink-600 transition-colors"
-          >
-            Flashcards
-          </Link>
-        </div>
-      </nav>
+      <Navigation />
 
-      <div className="p-8">
+      <div className="p-4 sm:p-6 lg:p-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-8 text-gray-800 dark:text-white">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 text-gray-800 dark:text-white">
             AI Slide Generator
           </h1>
 
-        <form onSubmit={handleSubmit} className="mb-8">
-          <div className="flex gap-3">
+        <form onSubmit={handleSubmit} className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="text"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="Enter a topic (e.g., 'JavaScript basics', 'World War 2')"
+              placeholder="Enter a topic (e.g., 'JavaScript basics')"
               className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               disabled={isLoading}
             />
             <button
               type="submit"
               disabled={isLoading}
-              className="px-8 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors disabled:bg-gray-400"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors disabled:bg-gray-400 min-h-[48px]"
             >
               {isLoading ? 'Generating...' : 'Generate'}
             </button>
@@ -116,31 +89,31 @@ export default function SlideGeneratorPage() {
         )}
 
         {!isLoading && slides.length > 0 && (
-          <div className="space-y-6">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
-              <div className="text-center mb-6">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8">
+              <div className="text-center mb-4 sm:mb-6">
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
                   Slide {currentIndex + 1} of {slides.length}
                 </span>
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {/* Title */}
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white text-center px-2">
                   {currentSlide?.title}
                 </h2>
 
                 {/* Key Points */}
                 {currentSlide?.keyPoints && currentSlide.keyPoints.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-3">
+                    <h3 className="text-base sm:text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-2 sm:mb-3">
                       Key Points
                     </h3>
                     <ul className="space-y-2">
                       {currentSlide.keyPoints.map((point, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="text-indigo-500 mr-2">•</span>
-                          <span className="text-gray-700 dark:text-gray-300">{point}</span>
+                          <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300">{point}</span>
                         </li>
                       ))}
                     </ul>
@@ -151,7 +124,7 @@ export default function SlideGeneratorPage() {
                 <div className="text-center">
                   <button
                     onClick={() => setShowDetails(!showDetails)}
-                    className="px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
+                    className="px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors min-h-[44px]"
                   >
                     {showDetails ? 'Hide Details' : 'Show Details'}
                   </button>
@@ -159,14 +132,14 @@ export default function SlideGeneratorPage() {
 
                 {/* Details Section (Hidden by default) */}
                 {showDetails && (
-                  <div className="space-y-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <div className="space-y-4 sm:space-y-6 pt-4 border-t border-gray-200 dark:border-gray-700">
                     {/* Detailed Explanation */}
                     {currentSlide?.detailedExplanation && (
                       <div>
-                        <h3 className="text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-3">
+                        <h3 className="text-base sm:text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-2 sm:mb-3">
                           Explanation
                         </h3>
-                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                           {currentSlide.detailedExplanation}
                         </p>
                       </div>
@@ -175,10 +148,10 @@ export default function SlideGeneratorPage() {
                     {/* Example */}
                     {currentSlide?.example && (
                       <div className="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-lg">
-                        <h3 className="text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-2">
+                        <h3 className="text-base sm:text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-2">
                           Example
                         </h3>
-                        <p className="text-gray-700 dark:text-gray-300">
+                        <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300">
                           {currentSlide.example}
                         </p>
                       </div>
@@ -187,14 +160,14 @@ export default function SlideGeneratorPage() {
                     {/* Related Concepts */}
                     {currentSlide?.relatedConcepts && currentSlide.relatedConcepts.length > 0 && (
                       <div>
-                        <h3 className="text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-3">
+                        <h3 className="text-base sm:text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-2 sm:mb-3">
                           Related Concepts
                         </h3>
                         <div className="flex flex-wrap gap-2">
                           {currentSlide.relatedConcepts.map((concept, idx) => (
                             <span
                               key={idx}
-                              className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
+                              className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-xs sm:text-sm"
                             >
                               {concept}
                             </span>
@@ -207,16 +180,17 @@ export default function SlideGeneratorPage() {
               </div>
             </div>
 
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center gap-2">
               <button
                 onClick={handlePrevious}
                 disabled={currentIndex === 0}
-                className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 sm:px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base min-h-[48px]"
               >
-                ← Previous
+                <span className="hidden sm:inline">← Previous</span>
+                <span className="sm:hidden">←</span>
               </button>
 
-              <div className="flex gap-2">
+              <div className="flex gap-1 sm:gap-2 overflow-x-auto max-w-[150px] sm:max-w-none">
                 {slides.map((_, index) => (
                   <button
                     key={index}
@@ -224,7 +198,7 @@ export default function SlideGeneratorPage() {
                       setCurrentIndex(index);
                       setShowDetails(false);
                     }}
-                    className={`w-3 h-3 rounded-full transition-colors ${
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors flex-shrink-0 ${
                       index === currentIndex
                         ? 'bg-indigo-600'
                         : 'bg-gray-300 dark:bg-gray-600'
@@ -236,16 +210,18 @@ export default function SlideGeneratorPage() {
               {currentIndex === slides.length - 1 ? (
                 <button
                   onClick={() => router.push(`/flashcards?topic=${encodeURIComponent(topic)}`)}
-                  className="px-6 py-3 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 transition-colors"
+                  className="px-3 sm:px-6 py-3 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 transition-colors text-sm sm:text-base min-h-[48px]"
                 >
-                  Generate Flashcards →
+                  <span className="hidden sm:inline">Generate Flashcards →</span>
+                  <span className="sm:hidden">Flashcards →</span>
                 </button>
               ) : (
                 <button
                   onClick={handleNext}
-                  className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                  className="px-3 sm:px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm sm:text-base min-h-[48px]"
                 >
-                  Next →
+                  <span className="hidden sm:inline">Next →</span>
+                  <span className="sm:hidden">→</span>
                 </button>
               )}
             </div>
