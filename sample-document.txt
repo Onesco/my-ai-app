@@ -1,0 +1,20 @@
+Introduction to Neural Networks
+
+Neural networks are computing systems inspired by the biological neural networks in animal brains. They consist of interconnected nodes (neurons) organized in layers.
+
+Key Components:
+1. Input Layer - Receives the initial data
+2. Hidden Layers - Process information through weighted connections
+3. Output Layer - Produces the final result
+
+Types of Neural Networks:
+- Feedforward Neural Networks (FNN)
+- Convolutional Neural Networks (CNN)
+- Recurrent Neural Networks (RNN)
+- Transformers
+
+Applications:
+Neural networks are widely used in image recognition, natural language processing, autonomous vehicles, and medical diagnosis.
+
+Learning Process:
+Neural networks learn through a process called backpropagation, adjusting weights to minimize error between predicted and actual outputs.
