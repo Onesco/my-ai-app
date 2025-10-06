@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My AI App
+
+An AI-powered educational application built with Next.js featuring three intelligent tools:
+
+## Features
+
+- **Image Generator** - Generate images using DALL-E 3
+- **Slide Generator** - Create educational slides with AI assistance
+- **Flashcards** - Study with AI-powered flashcards that include questions, hints, and answers
+
+## Tech Stack
+
+- **Next.js 15.5.4** with React 19
+- **Vercel AI SDK** (`@ai-sdk/openai`, `@ai-sdk/react`)
+- **TypeScript**
+- **Tailwind CSS** for styling
+- **Zod** for schema validation
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Set up your environment variables:
+
+Create a `.env.local` file with your OpenAI API key:
+```
+OPENAI_API_KEY=your_api_key_here
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) to see the app
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build for production with Turbopack
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── flashcards/      # AI flashcard generator
+│   ├── slide-generator/ # Educational slide creator
+│   ├── generate-image/  # DALL-E 3 image generator
+│   └── api/             # API routes
+└── components/          # Shared components
+```
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy this app is using the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Don't forget to add your `OPENAI_API_KEY` environment variable in your Vercel project settings.
